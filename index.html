@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Adicionar Abas</title>
+    <style>
+        .tab {
+            margin-bottom: 15px;
+        }
+        .tab textarea {
+            width: 100%;
+            resize: none;
+            overflow-y: hidden;
+            margin-top: 5px;
+        }
+    </style>
+</head>
+<body>
+    <button id="addTabBtn">Adicionar Aba</button>
+    <div id="tabsContainer"></div>
+
+    <script>
+        let tabCount = 0;
+
+        document.getElementById('addTabBtn').addEventListener('click', function() {
+            // Cria uma nova div para a aba
+            const newTab = document.createElement('div');
+            newTab.id = `aba${tabCount}`;
+            newTab.classList.add('tab');
+
+            // Adiciona um título para a aba
+            const tt = document.createElement('p');
+            tt.innerText = `Aba ${tabCount}`;
+            tt.style.margin = "0";
+            newTab.appendChild(tt);
+
+            // Cria o elemento textarea com ajuste de altura
+            const input = document.createElement('textarea');
+            input.placeholder = 'Digite aqui...';
+            newTab.appendChild(input);
+
+            // Ajusta a altura do textarea com base no conteúdo
+            input.addEventListener('input', function() {
+                this.style.height = 'auto'; // Redefine a altura
+                this.style.height = `${this.scrollHeight}px`; // Ajusta a altura com base no conteúdo
+            });
+
+            // Adiciona a nova aba ao container
+            document.getElementById('tabsContainer').appendChild(newTab);
+
+            // Incrementa o contador para a próxima aba
+            tabCount++;
+        });
+    </script>
+</body>
+</html>
